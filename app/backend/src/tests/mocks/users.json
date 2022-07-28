@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "username": "tryber",
+    "role": "student",
+    "email": "tryber@trybe.com.br",
+    "password": "123trybe"
+  },
+  {
+    "id": "2",
+    "username": "asdrubal",
+    "role": "teacher",
+    "email": "asdrubal@trybe.com.br",
+    "password": "asdrubal123"
+  }
+]
