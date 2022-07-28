@@ -1,5 +1,5 @@
 import { INTEGER, Model, STRING } from 'sequelize';
-import db from '.';
+import db from './index';
 
 class User extends Model {
   id: number;
@@ -10,7 +10,7 @@ class User extends Model {
 }
 
 User.init({
-  id: { type: INTEGER, allowNull: false, primaryKey: true, autoIncrement: true  },
+  id: { type: INTEGER, allowNull: false, primaryKey: true, autoIncrement: true },
   username: { type: STRING, allowNull: false },
   role: { type: STRING, allowNull: false },
   email: { type: STRING, allowNull: false },
@@ -24,7 +24,7 @@ User.init({
 });
 
 /**
-  * `Workaround` para aplicar as associations em TS: 
+  * `Workaround` para aplicar as associations em TS:
   * Associations 1:N devem ficar em uma das instâncias de modelo
   * */
 
