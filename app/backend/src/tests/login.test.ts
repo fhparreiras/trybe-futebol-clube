@@ -35,7 +35,8 @@ describe('POST /login', () => {
   });
 
   // after(()=>{
-  //   (User.findOne as sinon.SinonStub).restore();
+  //   // (User.findOne as sinon.SinonStub).restore();
+  //   userMock.findOne.restore();
   // })
 
   it('retorna código de status "401"', async () => {
