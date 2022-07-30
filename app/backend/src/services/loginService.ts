@@ -26,18 +26,6 @@ class LoginService {
     const token = tokenGenerator.generateJWTToken(jwtHeader);
     return { token };
   }
-
-  public async validate(loginDto: LoginDto) {
-    this._user = await User.findOne({
-      attributes: ['role', 'password'],
-      where: { email: loginDto.email },
-    });
-    const messageIncorrect = 'Incorrect email or password';
-    if (!this._user) throw new HttpException(401, messageIncorrect);
-    const checkPassword = await bcrypt.compare(loginDto.password, this._user.password);
-    if (!checkPassword) throw new HttpException(401, messageIncorrect);
-    return { role: this._user?.role };
-  }
 }
 
 export default LoginService;

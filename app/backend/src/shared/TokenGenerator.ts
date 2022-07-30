@@ -1,11 +1,12 @@
 import { sign, SignOptions, verify } from 'jsonwebtoken';
+import 'dotenv/config';
 import { IJWTHeaderDto } from '../controllers/dto/IJWTHeaderDto';
 import HttpException from './HttpException';
 
 const SECRET = process.env.SECRET || 'jwt_secret';
 
 const jwtDefaultConfig: SignOptions = {
-  expiresIn: '15m',
+  expiresIn: '1500m',
   algorithm: 'HS256',
 };
 
@@ -17,22 +18,19 @@ class TokenGenerator {
     return sign(payload, SECRET, this.jwtConfig);
   }
 
-  public async authenticateToken(token: string) {
+  public authenticateToken = (token: string) => {
     if (!token) {
       throw new HttpException(401, 'Sem Token');
     }
-
     try {
-      const introspection = verify(token, SECRET, this.jwtConfig);
-      // if (!introspection) {
-      //   throw new HttpException(401, 'token inválido');
-      // }
-      return introspection;
+      console.log('começou o try do decoded');
+      const decoded = verify(token, SECRET, this.jwtConfig);
+      console.log('decoded: ', decoded);
+      return decoded;
     } catch (e) {
-      // return e;
       throw new HttpException(401, 'Token inválido');
     }
-  }
+  };
 }
 
 export default TokenGenerator;
