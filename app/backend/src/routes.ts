@@ -8,4 +8,7 @@ const loginController = new LoginController();
 routes.post('/login', validateLogin, (req: Request, res: Response) =>
   loginController.login(req, res));
 
+routes.get('/login/validate', validateLogin, (req: Request, res: Response) =>
+  loginController.loginValidate(req, res));
+
 export default routes;
