@@ -39,8 +39,8 @@ describe('POST /login', () => {
   //   userMock.findOne.restore();
   // })
 
-  it('retorna código de status "401"', async () => {
-    expect(response).to.have.status(401);
+  it('retorna código de status "400"', async () => {
+    expect(response).to.have.status(400);
     // chaiHttpResponse = await chai
     //    .request(app)
     //    ...
