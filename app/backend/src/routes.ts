@@ -15,6 +15,9 @@ routes.get('/login/validate', tokenValidation, (req: Request, res: Response) =>
 
 const teamController = new TeamController();
 
+routes.get('/teams/:id', (req: Request, res: Response) =>
+  teamController.getTeamById(req, res));
+
 routes.get('/teams', (req: Request, res: Response) =>
   teamController.getTeams(req, res));
 
