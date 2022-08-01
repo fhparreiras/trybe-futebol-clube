@@ -23,9 +23,9 @@ class TokenGenerator {
       throw new HttpException(401, 'Sem Token');
     }
     try {
-      console.log('começou o try do decoded');
+      // console.log('começou o try do decoded');
       const decoded = verify(token, SECRET, this.jwtConfig);
-      console.log('decoded: ', decoded);
+      // console.log('decoded: ', decoded);
       return decoded;
     } catch (e) {
       throw new HttpException(401, 'Token inválido');

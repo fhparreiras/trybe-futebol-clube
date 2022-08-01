@@ -30,4 +30,7 @@ routes.get('/matches', (req: Request, res: Response) =>
 routes.post('/matches', tokenValidation, (req: Request, res: Response) =>
   matchController.createMatch(req, res));
 
+routes.patch('/matches/:id/finish', tokenValidation, (req: Request, res: Response) =>
+  matchController.finishMatch(req, res));
+
 export default routes;
