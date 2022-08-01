@@ -27,4 +27,7 @@ const matchController = new MatchController();
 routes.get('/matches', (req: Request, res: Response) =>
   matchController.getMatches(req, res));
 
+routes.post('/matches', tokenValidation, (req: Request, res: Response) =>
+  matchController.createMatch(req, res));
+
 export default routes;
