@@ -40,6 +40,10 @@ class MatchService {
   public finishMatch = async (id: number) => {
     await Match.update({ inProgress: false }, { where: { id } });
   };
+
+  public editMatchGoals = async (id: number, homeTeamGoals: number, awayTeamGoals: number) => {
+    await Match.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+  };
 }
 
 export default MatchService;

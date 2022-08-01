@@ -34,4 +34,7 @@ routes.post('/matches', tokenValidation, validateMatches, (req: Request, res: Re
 routes.patch('/matches/:id/finish', tokenValidation, (req: Request, res: Response) =>
   matchController.finishMatch(req, res));
 
+routes.patch('/matches/:id', tokenValidation, (req: Request, res: Response) =>
+  matchController.editMatchGoals(req, res));
+
 export default routes;
