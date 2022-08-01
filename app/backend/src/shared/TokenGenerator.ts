@@ -28,7 +28,7 @@ class TokenGenerator {
       // console.log('decoded: ', decoded);
       return decoded;
     } catch (e) {
-      throw new HttpException(401, 'Token inválido');
+      throw new HttpException(401, 'Token must be a valid token');
     }
   };
 }
