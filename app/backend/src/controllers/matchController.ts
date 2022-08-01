@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import HttpException from '../shared/HttpException';
 import MatchService from '../services/matchService';
 
 class MatchController {
@@ -25,13 +26,17 @@ class MatchController {
 
   public async createMatch(req: Request, res: Response) {
     const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = req.body;
-    const newMatch = await this.matchService.createMatch(
-      homeTeam,
-      awayTeam,
-      homeTeamGoals,
-      awayTeamGoals,
-    );
-    res.status(201).json(newMatch);
+    try {
+      const newMatch = await this.matchService.createMatch(
+        homeTeam,
+        awayTeam,
+        homeTeamGoals,
+        awayTeamGoals,
+      );
+      res.status(201).json(newMatch);
+    } catch (e) {
+      throw new HttpException(404, 'There is no team with such id!');
+    }
   }
 
   public async finishMatch(req: Request, res: Response) {

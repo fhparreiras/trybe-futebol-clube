@@ -32,13 +32,13 @@ class MatchService {
       awayTeam,
       homeTeamGoals,
       awayTeamGoals,
-      inProgress: 'true',
+      inProgress: true,
     });
     return this._newMatch;
   }
 
   public finishMatch = async (id: number) => {
-    await Match.update({ inProgress: 'false' }, { where: { id } });
+    await Match.update({ inProgress: false }, { where: { id } });
   };
 }
 
