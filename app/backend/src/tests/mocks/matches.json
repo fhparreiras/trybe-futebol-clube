@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "homeTeam": 16,
+    "homeTeamGoals": 1,
+    "awayTeam": 8,
+    "awayTeamGoals": 2,
+    "inProgress": false
+  },
+  {
+    "id": 2,
+    "homeTeam": 1,
+    "homeTeamGoals": 2,
+    "awayTeam": 7,
+    "awayTeamGoals": 2,
+    "inProgress": false
+  },
+  {
+    "id": 3,
+    "homeTeam": 5,
+    "homeTeamGoals": 0,
+    "awayTeam": 9,
+    "awayTeamGoals": 1,
+    "inProgress": true
+  },
+  {
+    "id": 4,
+    "homeTeam": 3,
+    "homeTeamGoals": 1,
+    "awayTeam": 10,
+    "awayTeamGoals": 0,
+    "inProgress": true
+  }
+]
