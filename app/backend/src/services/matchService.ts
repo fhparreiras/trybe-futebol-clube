@@ -1,6 +1,5 @@
 import sequelize = require('sequelize');
 import Match from '../database/models/Match';
-// import Team from '../database/models/Team';
 import { IMatch } from '../interfaces/IMatch';
 import HttpException from '../shared/HttpException';
 import { teamAway, teamHome } from '../helpers/sequelizeLiterals';
@@ -33,13 +32,13 @@ class MatchService {
       awayTeam,
       homeTeamGoals,
       awayTeamGoals,
-      inProgress: true,
+      inProgress: 'true',
     });
     return this._newMatch;
   }
 
   public finishMatch = async (id: number) => {
-    await Match.update({ inProgress: false }, { where: { id } });
+    await Match.update({ inProgress: 'false' }, { where: { id } });
   };
 }
 
