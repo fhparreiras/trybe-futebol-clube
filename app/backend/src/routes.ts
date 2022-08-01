@@ -4,6 +4,7 @@ import MatchController from './controllers/matchController';
 import TeamController from './controllers/teamController';
 import tokenValidation from './middlewares/tokenValidation';
 import validateLogin from './middlewares/validateLogin';
+import validateMatches from './middlewares/matchesValidation';
 
 const routes: Router = Router();
 
@@ -27,7 +28,7 @@ const matchController = new MatchController();
 routes.get('/matches', (req: Request, res: Response) =>
   matchController.getMatches(req, res));
 
-routes.post('/matches', tokenValidation, (req: Request, res: Response) =>
+routes.post('/matches', tokenValidation, validateMatches, (req: Request, res: Response) =>
   matchController.createMatch(req, res));
 
 routes.patch('/matches/:id/finish', tokenValidation, (req: Request, res: Response) =>
