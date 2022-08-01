@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import LoginController from './controllers/loginController';
+import MatchController from './controllers/matchController';
 import TeamController from './controllers/teamController';
 import tokenValidation from './middlewares/tokenValidation';
 import validateLogin from './middlewares/validateLogin';
@@ -20,5 +21,10 @@ routes.get('/teams/:id', (req: Request, res: Response) =>
 
 routes.get('/teams', (req: Request, res: Response) =>
   teamController.getTeams(req, res));
+
+const matchController = new MatchController();
+
+routes.get('/matches', (req: Request, res: Response) =>
+  matchController.getMatches(req, res));
 
 export default routes;
