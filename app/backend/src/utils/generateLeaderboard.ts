@@ -32,12 +32,32 @@ function getTotals(matches: any, homeTeamsUniq: string[]) {
       if (team === teamHome) {
         goalsFavor += homeTeamGoals;
         goalsOwn += awayTeamGoals;
-        if (homeTeamGoals > awayTeamGoals) totalVictories += 1;
-        if (homeTeamGoals < awayTeamGoals) { totalLosses += 1; } else { totalDraws += 1; }
+        if (homeTeamGoals > awayTeamGoals) { totalVictories += 1; }
+        if (homeTeamGoals < awayTeamGoals) totalLosses += 1;
+        if (homeTeamGoals === awayTeamGoals) totalDraws += 1;
       }
     });
     result.push({ name: team, totalVictories, totalDraws, totalLosses, goalsFavor, goalsOwn });
-  });
+  }); return result;
+}
+
+function getFinalResult(totals: any, games: any): any {
+  const result = totals
+    .map(({ name, totalVictories, totalDraws, totalLosses, goalsFavor, goalsOwn }:any, i:any) => (
+      {
+        name,
+        totalPoints: (totalVictories * 3) + (totalDraws),
+        totalGames: games[i].totalGames,
+        totalVictories,
+        totalDraws,
+        totalLosses,
+        goalsFavor,
+        goalsOwn,
+        goalsBalance: goalsFavor - goalsOwn,
+        efficiency: ((((totalVictories * 3) + (totalDraws)) / (games[i].totalGames * 3)) * 100)
+          .toFixed(2),
+      }
+    ));
   return result;
 }
 
@@ -46,19 +66,7 @@ function generateLeaderboard(matches: any): any {
   const homeTeamsUniq = getHomeTeams(homeTeams);
   const totalGames = getTotalGames(homeTeams, homeTeamsUniq);
   const totals = getTotals(matches, homeTeamsUniq);
-  const result = totals
-    .map(({ name, totalVictories, totalDraws, totalLosses, goalsFavor, goalsOwn }:any, index) => (
-      { name,
-        totalPoints: (totalVictories * 3) + (totalDraws),
-        totalGames: totalGames[index].totalGames,
-        totalVictories,
-        totalDraws,
-        totalLosses,
-        goalsFavor,
-        goalsOwn,
-        goalsBalance: goalsFavor - goalsOwn,
-        efficiency: ((totalVictories / totalGames[index].totalGames) * 100).toFixed(2),
-      }));
+  const result = getFinalResult(totals, totalGames);
   return result;
 }
 
