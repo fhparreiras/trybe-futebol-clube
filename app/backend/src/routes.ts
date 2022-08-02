@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import LoginController from './controllers/loginController';
 import MatchController from './controllers/matchController';
 import TeamController from './controllers/teamController';
+import LeaderboardController from './controllers/leaderboardController';
 import tokenValidation from './middlewares/tokenValidation';
 import validateLogin from './middlewares/validateLogin';
 import validateMatches from './middlewares/matchesValidation';
@@ -36,5 +37,10 @@ routes.patch('/matches/:id/finish', tokenValidation, (req: Request, res: Respons
 
 routes.patch('/matches/:id', tokenValidation, (req: Request, res: Response) =>
   matchController.editMatchGoals(req, res));
+
+const leaderboardController = new LeaderboardController();
+
+routes.get('/leaderboard/home', (req: Request, res: Response) =>
+  leaderboardController.getHomeLeaderboard(req, res));
 
 export default routes;
