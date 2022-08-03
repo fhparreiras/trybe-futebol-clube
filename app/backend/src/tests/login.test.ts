@@ -15,43 +15,83 @@ const { expect } = chai;
 
 describe('POST /login', () => {
   describe ('Quando não é passado usuário e senha', () => {
-    // let chaiHttpResponse: Response;
-    let response: any;
+    let response: Response;
 
-  before(async () => {
-    sinon.stub(User, 'findOne').callsFake(userMock.findOne);
-  // })
-  // before(async () => {
-    const reqBody = {};
-    response = await chai.request(app)
-      .post('/login')
-      .send(reqBody);
+    before(async () => {
+      sinon.stub(User, 'findOne').callsFake(userMock.findOne);
 
-    // sinon
-    //   .stub(User, "findOne")
-    //   .resolves({
-    //     ...UserMock
-    //   } as User);
-  });
+      const reqBody = {};
+      response = await chai.request(app)
+        .post('/login')
+        .send(reqBody);
+    });
 
-  // after(()=>{
-  //   // (User.findOne as sinon.SinonStub).restore();
-  //   userMock.findOne.restore();
-  // })
+    after(() => {
+      (User.findOne as sinon.SinonStub).restore();
+    })
 
-  it('retorna código de status "400"', async () => {
-    expect(response).to.have.status(400);
-    // chaiHttpResponse = await chai
-    //    .request(app)
-    //    ...
+    it('retorna código de status "400"', async () => {
+      expect(response).to.have.status(400);
+    });
 
-    // expect(...)
-  });
-
+    it('retorna a mensagem "All fields must be filled"', async () => {
+      expect(response.body.message).to.be.equal('All fields must be filled');
+    });
   })
-  
 
-  // it('Seu sub-teste', () => {
-  //   expect(false).to.be.eq(true);
-  // });
+  describe ('Quando é passado usuário inválido', () => {
+    let response: Response;
+
+    before(async () => {
+      sinon.stub(User, 'findOne').callsFake(userMock.findOne);
+
+      const reqBody = {
+        email: 'teste.com',
+        password: '1234567'
+      };
+      response = await chai.request(app)
+        .post('/login')
+        .send(reqBody);
+    });
+
+    after(() => {
+      (User.findOne as sinon.SinonStub).restore();
+    })
+
+    it('retorna código de status "401"', async () => {
+      expect(response).to.have.status(401);
+    });
+
+    it('retorna a mensagem "Incorrect email or password"', async () => {
+      expect(response.body.message).to.be.equal('Incorrect email or password');
+    });
+  })
+
+  describe ('Quando é passado password inválido', () => {
+    let response: Response;
+
+    before(async () => {
+      sinon.stub(User, 'findOne').callsFake(userMock.findOne);
+
+      const reqBody = {
+        email: 'teste@teste.com',
+        password: '123'
+      };
+      response = await chai.request(app)
+        .post('/login')
+        .send(reqBody);
+    });
+
+    after(() => {
+      (User.findOne as sinon.SinonStub).restore();
+    })
+
+    it('retorna código de status "401"', async () => {
+      expect(response).to.have.status(401);
+    });
+
+    it('retorna a mensagem "Incorrect email or password"', async () => {
+      expect(response.body.message).to.be.equal('Incorrect email or password');
+    });
+  })
 });

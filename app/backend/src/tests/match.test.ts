@@ -5,7 +5,6 @@ import chaiHttp = require('chai-http');
 
 import { app } from '../app';
 import Match from '../database/models/Match';
-// const { Match: matchMock } = require('./mocks');
 import { Response } from 'superagent';
 
 chai.use(chaiHttp);
@@ -14,11 +13,9 @@ const { expect } = chai;
 
 describe('GET /teams', () => {
   describe ('Quando são procuradas as partidas com getAll', () => {
-    // let chaiHttpResponse: Response;
-    let response: any;
+    let response: Response;
 
   before(async () => {
-    // sinon.stub(Team, 'findAll').callsFake(teamMock.findAll);
     response = await chai.request(app).get('/matches');
   });
     it('retorna código de status "200"', async () => {
