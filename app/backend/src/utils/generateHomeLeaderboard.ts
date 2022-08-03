@@ -41,7 +41,7 @@ function getTotals(matches: any, homeTeamsUniq: string[]) {
   }); return result;
 }
 
-function getFinalResult(totals: any, games: any): any {
+function getFinalResult(totals: object[], games: any): any {
   const result = totals
     .map(({ name, totalVictories, totalDraws, totalLosses, goalsFavor, goalsOwn }:any, i:any) => (
       {
@@ -61,7 +61,7 @@ function getFinalResult(totals: any, games: any): any {
   return result;
 }
 
-function generateLeaderboard(matches: any): any {
+function generateHomeLeaderboard(matches: object[]): any {
   const homeTeams: string[] = matches.map((match: any) => match.teamHome);
   const homeTeamsUniq = getHomeTeams(homeTeams);
   const totalGames = getTotalGames(homeTeams, homeTeamsUniq);
@@ -70,4 +70,4 @@ function generateLeaderboard(matches: any): any {
   return result;
 }
 
-export default generateLeaderboard;
+export default generateHomeLeaderboard;

@@ -14,7 +14,6 @@ class LeaderboardService {
         [sequelize.literal(teamHome), 'teamHome'],
         [sequelize.literal(teamAway), 'teamAway'],
       ] },
-      order: ['homeTeam'],
       where: { inProgress: false },
     });
     return this._leaderboardHome;
