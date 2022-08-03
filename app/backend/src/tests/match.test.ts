@@ -21,7 +21,7 @@ describe('GET /teams', () => {
     it('retorna código de status "200"', async () => {
       expect(response).to.have.status(200);
     });
-    it('retorna um objeto no body', async () => {
+    it('retorna um array no body', async () => {
       expect(response.body).to.be.an('array');
     });
     it('retorna as partidas', async () => {

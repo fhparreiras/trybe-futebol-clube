@@ -1,3 +1,5 @@
+const MatchData = require('./matches.json');
+const TeamData = require('./teams.json');
 const UsersData = require('./users.json');
 
 const mockFindOne = (Instance: any, where: object) => {
@@ -25,6 +27,16 @@ const User = {
   findOne: async (where: object) => mockFindOne(UsersData, where),
 };
 
+const Match = {
+  findAll: async () => MatchData
+}
+
+const Team = {
+  findAll: async () => TeamData
+}
+
 module.exports = {
+  Match,
+  Team,
   User
 };
