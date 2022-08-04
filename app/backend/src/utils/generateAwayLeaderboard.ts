@@ -1,3 +1,8 @@
+import { ITotals } from '../interfaces/ITotals';
+import { ILeaderboard } from '../interfaces/ILeaderboard';
+import { IMatch } from '../interfaces/IMatch';
+import { ITotalGames } from '../interfaces/ITotalGames';
+
 function getAwayTeams(awayTeams: string []): string [] {
   const awayTeamsUniq: string [] = [];
   awayTeams.forEach((team: string) => {
@@ -7,7 +12,7 @@ function getAwayTeams(awayTeams: string []): string [] {
 }
 
 function getTotalGames(awayTeams: string[], awayTeamsUniq: string[]) {
-  const totalGames: any[] = [];
+  const totalGames: ITotalGames[] = [];
   awayTeamsUniq.forEach((team) => {
     let countMatches = 0;
     awayTeams.forEach((awayTeam) => {
@@ -18,8 +23,8 @@ function getTotalGames(awayTeams: string[], awayTeamsUniq: string[]) {
   return totalGames;
 }
 
-function getTotals(matches: any, awayTeamsUniq: string[]) {
-  const result: any[] = [];
+function getTotals(matches: IMatch[], awayTeamsUniq: string[]) {
+  const result: ITotals[] = [];
   awayTeamsUniq.forEach((team) => {
     let totalVictories = 0;
     let totalDraws = 0;
@@ -39,7 +44,7 @@ function getTotals(matches: any, awayTeamsUniq: string[]) {
   }); return result;
 }
 
-function getFinalResult(totals: object[], games: any): any {
+function getFinalResult(totals: ITotals[], games: ITotalGames[]): ILeaderboard[] {
   const result = totals
     .map(({ name, totalVictories, totalDraws, totalLosses, goalsFavor, goalsOwn }:any, i:any) => (
       {
@@ -59,7 +64,7 @@ function getFinalResult(totals: object[], games: any): any {
   return result;
 }
 
-function generateAwayLeaderboard(matches: object[]): any {
+function generateAwayLeaderboard(matches: IMatch[]): ILeaderboard[] {
   const awayTeams: string[] = matches.map((match: any) => match.teamAway);
   const awayTeamsUniq = getAwayTeams(awayTeams);
   const totalGames = getTotalGames(awayTeams, awayTeamsUniq);

@@ -1,4 +1,6 @@
-const leaderboardObject = (home: any, away: any): any => {
+import { ILeaderboard } from '../interfaces/ILeaderboard';
+
+const leaderboardObject = (home: ILeaderboard, away: ILeaderboard): ILeaderboard => {
   const totalPoints = home.totalPoints + away.totalPoints;
   const totalGames = home.totalGames + away.totalGames;
   const maxPoints = totalGames * 3;
