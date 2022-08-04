@@ -17,8 +17,6 @@ class LoginController {
   public loginValidate = async (req: Request, res: Response) => {
     const user = res.locals?.payload;
     const { role } = user;
-    // const role = await this.loginService.validate();
-    // console.log('ROLE: ', role);
     res.status(200).json({ role });
   };
 }
